@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ResumeDoctor AI</title>
+    <link rel="stylesheet" href="static/css/auth_styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>🤖 ResumeDoctor AI</h1>
+            <p class="subtitle">Sign in to your account</p>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="loginBtn">Login</button>
+        </form>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="us10_register.html" class="auth-link">Register here</a>
+        </div>
+    </div>
+
+    <script src="static/js/config.js"></script>
+    <script src="static/js/us10_login.js"></script>
+</body>
+</html>

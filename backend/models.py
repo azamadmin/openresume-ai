@@ -8,6 +8,17 @@ import json
 
 db = SQLAlchemy()
 
+def get_current_user_id():
+    """Helper function to get current user ID as integer from JWT"""
+    from flask_jwt_extended import get_jwt_identity
+    user_id_str = get_jwt_identity()
+    return int(user_id_str) if user_id_str else None
+
+def get_current_user():
+    """Helper function to get current user object from JWT"""
+    user_id = get_current_user_id()
+    return User.query.get(user_id) if user_id else None
+
 class User(db.Model):
     __tablename__ = 'users'
     
@@ -18,6 +29,9 @@ class User(db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(50), default='basic')  # basic, premium, admin
     is_active = db.Column(db.Boolean, default=True)
+    is_email_verified = db.Column(db.Boolean, default=False)
+    email_verification_token = db.Column(db.String(255), nullable=True)
+    email_verification_sent_at = db.Column(db.DateTime, nullable=True)
     last_login = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -47,22 +61,28 @@ class User(db.Model):
     
     def generate_tokens(self):
         """Generate JWT access and refresh tokens"""
+        from datetime import timedelta
+
         access_token = create_access_token(
-            identity=self.id,
+            identity=str(self.id),  # Convert to string for consistency
             additional_claims={
                 'email': self.email,
                 'first_name': self.first_name,
                 'last_name': self.last_name,
                 'role': self.role
-            }
+            },
+            expires_delta=timedelta(hours=1)  # 1 hour expiry
         )
-        refresh_token = create_refresh_token(identity=self.id)
-        
+        refresh_token = create_refresh_token(
+            identity=str(self.id),  # Convert to string for consistency
+            expires_delta=timedelta(days=7)  # 7 days expiry
+        )
+
         return {
             'access_token': access_token,
             'refresh_token': refresh_token,
             'token_type': 'Bearer',
-            'expires_in': 86400
+            'expires_in': 3600  # 1 hour in seconds
         }
     
     @staticmethod
@@ -81,6 +101,30 @@ class User(db.Model):
     def has_role(self, role):
         """Check if user has specific role"""
         return self.role == role
+
+    def generate_email_verification_token(self):
+        """Generate email verification token"""
+        import secrets
+        self.email_verification_token = secrets.token_urlsafe(32)
+        self.email_verification_sent_at = datetime.utcnow()
+        return self.email_verification_token
+
+    def verify_email(self, token):
+        """Verify email with token"""
+        if self.email_verification_token == token:
+            self.is_email_verified = True
+            self.email_verification_token = None
+            self.email_verification_sent_at = None
+            return True
+        return False
+
+    def is_verification_token_expired(self, hours=24):
+        """Check if verification token is expired (default 24 hours)"""
+        if not self.email_verification_sent_at:
+            return True
+        from datetime import timedelta
+        expiry_time = self.email_verification_sent_at + timedelta(hours=hours)
+        return datetime.utcnow() > expiry_time
 
     def is_premium(self):
         """Check if user has premium access"""
@@ -119,6 +163,7 @@ class User(db.Model):
             'is_premium': self.is_premium(),
             'is_admin': self.is_admin(),
             'is_active': self.is_active,
+            'is_email_verified': self.is_email_verified,
             'last_login': self.last_login.isoformat() if self.last_login else None,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'resume_count': len(self.resumes),

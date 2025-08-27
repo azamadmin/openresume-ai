@@ -6,7 +6,7 @@ Enhanced JWT protection with role-based access control
 from functools import wraps
 from flask import jsonify, request, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt, verify_jwt_in_request
-from models import User, db
+from backend.models import User, db
 import logging
 
 # Set up logging

@@ -5,7 +5,7 @@ Implements keyword matching algorithms to compare resumes with job descriptions
 
 import logging
 from typing import Dict, List, Tuple, Set
-from models import db, Resume, JobDescription, MatchScore
+from backend.models import db, Resume, JobDescription, MatchScore
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

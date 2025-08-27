@@ -57,18 +57,27 @@ class FileParser:
             return False, "", error_msg
     
     @staticmethod
-    def extract_text_from_docx(file_path):
+    def extract_text_from_docx(file_path_or_file):
         """
         Extract text from DOCX file using python-docx
-        
+
         Args:
-            file_path (str): Path to the DOCX file
-            
+            file_path_or_file: Either a file path (str) or a file object
+
         Returns:
             tuple: (success: bool, text: str, error: str)
         """
         try:
-            doc = Document(file_path)
+            # Handle both file paths and file objects
+            if hasattr(file_path_or_file, 'read'):
+                # It's a file object (from Flask request)
+                doc = Document(file_path_or_file)
+                source_info = "uploaded file"
+            else:
+                # It's a file path
+                doc = Document(file_path_or_file)
+                source_info = file_path_or_file
+
             text = ""
             
             # Extract text from paragraphs
@@ -90,7 +99,7 @@ class FileParser:
             if not text.strip():
                 return False, "", "No readable text found in DOCX file."
             
-            logger.info(f"Successfully extracted {len(text)} characters from DOCX: {file_path}")
+            logger.info(f"Successfully extracted {len(text)} characters from DOCX: {source_info}")
             return True, text, ""
             
         except Exception as e:
@@ -149,33 +158,49 @@ class FileParser:
     @staticmethod
     def _clean_extracted_text(text):
         """
-        Clean and normalize extracted text
-        
+        Clean and normalize extracted text, removing problematic characters
+
         Args:
             text (str): Raw extracted text
-            
+
         Returns:
-            str: Cleaned text
+            str: Cleaned text safe for database storage
         """
         if not text:
             return ""
-        
-        # Remove excessive whitespace
+
+        import re
+
+        # Step 1: Remove null bytes and other problematic characters
+        # Remove null bytes (0x00) that cause PostgreSQL errors
+        text = text.replace('\x00', '')
+
+        # Remove other control characters except newlines, tabs, and carriage returns
+        text = re.sub(r'[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]', '', text)
+
+        # Step 2: Normalize unicode characters
+        import unicodedata
+        text = unicodedata.normalize('NFKD', text)
+
+        # Step 3: Remove excessive whitespace
         lines = text.split('\n')
         cleaned_lines = []
-        
+
         for line in lines:
             line = line.strip()
             if line:  # Only keep non-empty lines
+                # Remove excessive spaces within the line
+                line = re.sub(r' +', ' ', line)
                 cleaned_lines.append(line)
-        
+
         # Join lines with single newlines
         cleaned_text = '\n'.join(cleaned_lines)
-        
-        # Remove excessive spaces
-        import re
-        cleaned_text = re.sub(r' +', ' ', cleaned_text)
-        
+
+        # Step 4: Ensure the text is not too long (database field limits)
+        max_length = 50000  # Reasonable limit for resume text
+        if len(cleaned_text) > max_length:
+            cleaned_text = cleaned_text[:max_length] + "... [truncated]"
+
         return cleaned_text
     
     @staticmethod

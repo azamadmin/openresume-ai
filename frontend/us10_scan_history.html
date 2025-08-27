@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History - ResumeDoctor AI</title>
+    <link rel="stylesheet" href="static/css/us10_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="dashboard-header">
+        <div class="nav-brand">
+            <div class="logo-dot"></div>
+            <span class="brand-text">ResumeDoctor AI</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="us10_dashboard.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                Dashboard
+            </a>
+            <a href="us10_scan_history.html" class="nav-item active">
+                <span class="nav-icon">📊</span>
+                Scan History
+            </a>
+            <a href="us10_account.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Account
+            </a>
+            <button class="nav-item logout-btn" onclick="logout()">
+                <span class="nav-icon">🚪</span>
+                Logout
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-content">
+        <div class="container">
+            <!-- Page Header -->
+            <section class="page-header">
+                <h1 class="page-title">Scan History</h1>
+                <p class="page-subtitle">View your recent resume-job description matching analyses</p>
+            </section>
+
+            <!-- Filters and Controls -->
+            <section class="history-controls">
+                <div class="controls-row">
+                    <div class="filter-group">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select" class="filter-select">
+                            <option value="created_at_desc">Newest First</option>
+                            <option value="created_at_asc">Oldest First</option>
+                            <option value="score_desc">Highest Score</option>
+                            <option value="score_asc">Lowest Score</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="score-filter">Filter by Score:</label>
+                        <select id="score-filter" class="filter-select">
+                            <option value="">All Scores</option>
+                            <option value="excellent">Excellent (80-100%)</option>
+                            <option value="good">Good (60-79%)</option>
+                            <option value="fair">Fair (40-59%)</option>
+                            <option value="poor">Poor (0-39%)</option>
+                        </select>
+                    </div>
+                    <button class="refresh-btn" onclick="loadScanHistory()">
+                        <span class="btn-icon">🔄</span>
+                        Refresh
+                    </button>
+                </div>
+            </section>
+
+            <!-- Scan History List -->
+            <section class="scan-history-section">
+                <div id="scan-history-loading" class="loading-state" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Loading scan history...</p>
+                </div>
+
+                <div id="scan-history-list" class="scan-history-list">
+                    <!-- Scan history items will be populated here -->
+                </div>
+
+                <div id="scan-history-empty" class="empty-state" style="display: none;">
+                    <div class="empty-icon">📊</div>
+                    <h4>No Scan History Yet</h4>
+                    <p>Upload a resume and job description to start analyzing matches</p>
+                    <a href="us10_dashboard.html" class="btn-link">Go to Dashboard</a>
+                </div>
+            </section>
+
+            <!-- Pagination -->
+            <section class="pagination-section" id="pagination-section" style="display: none;">
+                <div class="pagination-info">
+                    <span id="pagination-info-text">Showing 1-5 of 10 results</span>
+                </div>
+                <div class="pagination-controls">
+                    <button id="prev-page" class="pagination-btn" onclick="changePage(-1)">
+                        ← Previous
+                    </button>
+                    <span id="page-numbers" class="page-numbers">
+                        <!-- Page numbers will be populated here -->
+                    </span>
+                    <button id="next-page" class="pagination-btn" onclick="changePage(1)">
+                        Next →
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-icon">🤖</div>
+                    <span class="brand-text">ResumeDoctor AI</span>
+                    <p>The most advanced AI-powered resume optimization platform. Get 3x more interviews with intelligent ATS optimization.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="#" class="footer-link">Resume Scanner</a>
+                        <a href="#" class="footer-link">Resume Builder</a>
+                        <a href="#" class="footer-link">Cover Letters</a>
+                        <a href="#" class="footer-link">LinkedIn Optimizer</a>
+                        <a href="#" class="footer-link">Job Tracker</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ResumeDoctor AI. All rights reserved.</p>
+                <p>Trusted by 50,000+ job seekers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/config.js"></script>
+    <script src="static/js/us10_scan_history.js"></script>
+</body>
+</html>

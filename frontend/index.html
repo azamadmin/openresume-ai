@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeDoctor AI - AI-Powered Resume Optimization Platform</title>
+    <link rel="stylesheet" href="./static/css/landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">🤖</div>
+                <span class="brand-text">ResumeDoctor AI</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="us10_login.html" class="nav-link">Sign In</a>
+                <a href="us10_login.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">⚡</span>
+                    AI-Powered Optimization
+                </div>
+                <h1 class="hero-title">
+                    Beat ATS Systems with
+                    <span class="gradient-text">AI-Powered</span>
+                    Resume Optimization
+                </h1>
+                <p class="hero-description">
+                    Get 3x more interviews with our advanced AI that optimizes your resume for 80+ ATS systems and provides real-time feedback.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-large" onclick="scrollToUpload()">
+                        <span class="btn-icon">📄</span>
+                        Scan Your Resume Free
+                    </button>
+                    <button class="btn btn-secondary btn-large" onclick="playDemo()">
+                        <span class="btn-icon">▶️</span>
+                        Watch Demo
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">87%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50k+</div>
+                        <div class="stat-label">Optimized Resumes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3x</div>
+                        <div class="stat-label">More Interviews</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="dashboard-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="mockup-title">Resume Analysis Dashboard</div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="score-section">
+                            <div class="score-title">ATS Match Score</div>
+                            <div class="score-circle">
+                                <div class="score-value">87%</div>
+                            </div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <div class="metric-label">Keywords Found</div>
+                                <div class="metric-value">24/31</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Skills Match</div>
+                                <div class="metric-value">92%</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Format Score</div>
+                                <div class="metric-status excellent">Excellent</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Content Quality</div>
+                                <div class="metric-status enhanced">AI Enhanced</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload-section" id="upload">
+        <div class="container">
+            <h2 class="section-title">Upload & Scan Your Resume in Seconds</h2>
+            <p class="section-description">
+                Our advanced AI analyzes your resume against 80+ ATS systems and provides instant optimization suggestions.
+            </p>
+            <div class="upload-container">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <h3>Drop your resume here</h3>
+                    <p>Supports PDF, DOCX up to 5MB</p>
+                    <button class="btn btn-outline" onclick="document.getElementById('fileInput').click()">
+                        Browse Files
+                    </button>
+                    <input type="file" id="fileInput" accept=".pdf,.doc,.docx" style="display: none;">
+                </div>
+                <div class="upload-security">
+                    <span class="security-icon">🔒</span>
+                    Your data is encrypted and secure
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-header">
+                <div class="section-badge">Advanced AI Technology</div>
+                <h2 class="section-title">Powered by Next-Generation AI</h2>
+                <p class="section-description">
+                    Our proprietary AI engine provides insights that go far beyond basic keyword matching.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon brain">🧠</div>
+                    <h3>Smart Content Analysis</h3>
+                    <p>AI-powered semantic analysis that understands context, not just keywords, ensuring your resume tells the right story.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon auto">⚡</div>
+                    <h3>Auto-Optimization</h3>
+                    <p>Automatically suggests improvements for bullet points, skills, and experiences based on successful resumes in your field.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon predict">🎯</div>
+                    <h3>Predictive Scoring</h3>
+                    <p>Machine learning algorithms predict your interview chances based on millions of successful applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon ats">🛡️</div>
+                    <h3>Multi-ATS Testing</h3>
+                    <p>Test your resume against 80+ ATS systems including Workday, Taleo, Greenhouse, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon insights">💡</div>
+                    <h3>Personalized Insights</h3>
+                    <p>Get customized recommendations based on your industry, experience level, and career goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon realtime">🔄</div>
+                    <h3>Real-Time Updates</h3>
+                    <p>See your match score improve instantly as you make changes, with live feedback and suggestions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section class="dashboard-preview">
+        <div class="container">
+            <h2 class="section-title">Complete Job Search Dashboard</h2>
+            <p class="section-description">
+                Manage your entire job search from one powerful platform with advanced analytics and AI insights.
+            </p>
+            <div class="dashboard-showcase">
+                <div class="dashboard-frame">
+                    <div class="dashboard-header-preview">
+                        <div class="welcome-text">Welcome back, Sarah</div>
+                        <div class="notification">You have 3 new job matches today</div>
+                        <button class="new-resume-btn">New Resume</button>
+                    </div>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Applications Sent</div>
+                            <div class="stat-change positive">12% from last week</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">7</div>
+                            <div class="stat-label">Interview Requests</div>
+                            <div class="stat-change positive">3 new this week</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">82%</div>
+                            <div class="stat-label">Average Match Score</div>
+                            <div class="stat-change positive">5% improvement</div>
+                        </div>
+                    </div>
+                    <div class="recent-applications">
+                        <h4>Recent Applications</h4>
+                        <div class="application-item">
+                            <div class="app-info">
+                                <div class="app-title">Senior Software Engineer</div>
+                                <div class="app-company">TechCorp Inc. • San Francisco, CA</div>
+                            </div>
+                            <div class="app-score">87% Match</div>
+                            <div class="app-status">Under Review</div>
+                        </div>
+                        <div class="application-item">
+                            <div class="app-info">
+                                <div class="app-title">Product Manager</div>
+                                <div class="app-company">StartupXYZ • Remote</div>
+                            </div>
+                            <div class="app-score">92% Match</div>
+                            <div class="app-status interview">Interview Scheduled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <p class="section-description">
+                Start free and upgrade when you need advanced features. No hidden fees, cancel anytime.
+            </p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3>Free</h3>
+                        <div class="plan-price">
+                            <span class="price">$0</span>
+                            <span class="period">Forever</span>
+                        </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>5 resume scans per month</li>
+                        <li>Basic ATS compatibility check</li>
+                        <li>1 resume template</li>
+                        <li>Basic keyword suggestions</li>
+                    </ul>
+                    <button class="btn btn-outline btn-full">Get Started Free</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-header">
+                        <h3>Pro</h3>
+                        <div class="plan-price">
+                            <span class="price">$29</span>
+                            <span class="period">per month</span>
+                        </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Unlimited resume scans</li>
+                        <li>Advanced AI optimization</li>
+                        <li>50+ premium templates</li>
+                        <li>Cover letter optimization</li>
+                        <li>LinkedIn profile optimization</li>
+                        <li>Job tracking dashboard</li>
+                    </ul>
+                    <button class="btn btn-primary btn-full">Start Pro Trial</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3>Enterprise</h3>
+                        <div class="plan-price">
+                            <span class="price">$99</span>
+                            <span class="period">per month</span>
+                        </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Everything in Pro</li>
+                        <li>Team management</li>
+                        <li>White-label solution</li>
+                        <li>API access</li>
+                        <li>Priority support</li>
+                        <li>Custom integrations</li>
+                    </ul>
+                    <button class="btn btn-outline btn-full">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-icon">🤖</div>
+                    <span class="brand-text">ResumeDoctor AI</span>
+                    <p>The most advanced AI-powered resume optimization platform. Get 3x more interviews with intelligent ATS optimization.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="#" class="footer-link">Resume Scanner</a>
+                        <a href="#" class="footer-link">Resume Builder</a>
+                        <a href="#" class="footer-link">Cover Letters</a>
+                        <a href="#" class="footer-link">LinkedIn Optimizer</a>
+                        <a href="#" class="footer-link">Job Tracker</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ResumeDoctor AI. All rights reserved.</p>
+                <p>Trusted by 50,000+ job seekers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./static/js/landing.js"></script>
+</body>
+</html>
